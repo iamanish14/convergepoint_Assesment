@@ -18,7 +18,7 @@ public class Homepage extends BaseClass {
 	}
 
 	@FindBy(id = "nav-hamburger-menu")
-	private WebElement selectall;
+	private WebElement select_all;
 
 	@FindBy(xpath = "//div[@id=\"hmenu-content\"]//div[text()=\"Men's Fashion\"]")
 	private WebElement mensfashion;
@@ -54,7 +54,7 @@ public class Homepage extends BaseClass {
 	}
 
 	public void openMensFashion() {
-		selectelemnet(driver, selectall);
+		selectelemnet(driver, select_all);
 		scrollview(mensfashion);
 		selectelemnet(driver, mensfashion);
 		javascript(mensfashion1);

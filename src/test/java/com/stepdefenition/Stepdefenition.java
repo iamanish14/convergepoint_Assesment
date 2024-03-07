@@ -1,5 +1,6 @@
 package com.stepdefenition;
 
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
@@ -8,7 +9,6 @@ import com.pom.PageObjectManager;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
-
 
 public class Stepdefenition extends BaseClass {
 
@@ -19,6 +19,7 @@ public class Stepdefenition extends BaseClass {
 		launchbrowser();
 
 		launchurl("https://www.amazon.in//");
+		LOGGER.info("url launched succesfully");
 
 		String a1 = driver.getTitle();
 		System.out.println(a1);
@@ -30,6 +31,7 @@ public class Stepdefenition extends BaseClass {
 	public void click_on_fashion_and_click_on_mens() throws InterruptedException {
 
 		obj.page().openMensFashion();
+		LOGGER.info("mens fashioned sucessfully");
 
 	}
 
@@ -37,6 +39,7 @@ public class Stepdefenition extends BaseClass {
 	public void fileter_by_average_custumor_review_stars_and_up(Integer int1) {
 
 		obj.page().filterstar();
+		LOGGER.info("filter applied succesfully");
 
 	}
 
@@ -44,12 +47,15 @@ public class Stepdefenition extends BaseClass {
 	public void filter_by_price(Integer int1, Integer int2) {
 
 		obj.page().filterprice();
+		LOGGER.info("filterprice applied succesfully");
+
 	}
 
 	@When("Select puma and Allen Solley in brands")
 	public void select_puma_and_allen_solley_in_brands() throws Throwable {
 
 		obj.page().brandselection();
+		LOGGER.info("brand selected sucessfully");
 
 	}
 
@@ -57,20 +63,22 @@ public class Stepdefenition extends BaseClass {
 	public void count_the_number_of_result_in_first_page_and_log_to_console() {
 		timeout();
 
-		System.out.print("Count of total products in the current page : "+obj.page().getsecondproduct().size());
+		System.out.print("Count of total products in the current page : " + obj.page().getsecondproduct().size());
 		screenshot("cart page");
+		LOGGER.info("number of result in first page is displayed");
 	}
 
 	@When("Click the second product  and add to cart")
 	public void click_the_second_product_and_add_to_cart() {
 		int size = obj.page().getsecondproduct().size();
-		
+
 		if (size >= 2) {
 			WebElement secondelement = obj.page().getsecondproduct().get(1);
 			secondelement.click();
 		} else {
 			System.out.println("not passed");
 		}
+		LOGGER.info("second product added to the cart");
 
 	}
 
@@ -78,8 +86,9 @@ public class Stepdefenition extends BaseClass {
 	public void validate_number_and_cart_is_increased_by(int int1) throws Throwable {
 
 		obj.page().addingtocart();
-		
+
 		Assert.assertTrue(obj.page().getNumberOfProductsInCart() == 1);
-		
+		LOGGER.info("program passed");
+
 	}
 }

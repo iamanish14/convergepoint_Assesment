@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
@@ -23,6 +25,8 @@ import dev.failsafe.Timeout;
 public class BaseClass {
 	public static WebDriver driver;
 
+	public static final Logger LOGGER = LogManager.getLogger(BaseClass.class);
+
 	public static void launchbrowser() {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
@@ -36,12 +40,12 @@ public class BaseClass {
 
 	public static void selectelemnet(WebDriver driver, WebElement element) {
 		new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOf(element)).click();
-		
+
 	}
-	
+
 	public void screenshot(String fileName) {
-		File src = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		File dest = new File(".\\Screenshots\\"+fileName+".png");
+		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		File dest = new File(".\\Screenshots\\" + fileName + ".png");
 		try {
 			FileUtils.copyFile(src, dest);
 		} catch (IOException e) {
@@ -59,7 +63,7 @@ public class BaseClass {
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
-		js.executeScript("arguments[0].scrollIntoView();",element);
+		js.executeScript("arguments[0].scrollIntoView();", element);
 
 	}
 
@@ -70,7 +74,7 @@ public class BaseClass {
 	public static void refresh() {
 		driver.navigate().refresh();
 	}
-	
+
 	public String text(WebDriver driver, WebElement element) {
 		return element.getText();
 	}
